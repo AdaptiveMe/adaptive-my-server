@@ -22,7 +22,7 @@
     <packaging>pom</packaging>
     <name>Che SDK :: Assemblies Tomcat</name>
     <properties>
-        <org.apache.tomcat.version>7.0.50</org.apache.tomcat.version>
+        <org.apache.tomcat.version>8.0.22</org.apache.tomcat.version>
     </properties>
     <dependencies>
         <dependency>
@@ -175,10 +175,10 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>org.apache.tomcat</groupId>
-                                    <artifactId>tomcat</artifactId>
+                                    <groupId>com.codenvy.resources</groupId>
+                                    <artifactId>codenvy-tomcat-slf4j-logback</artifactId>
                                     <type>zip</type>
-                                    <version>${org.apache.tomcat.version}</version>
+                                    <version>6-SNAPSHOT</version>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/packager-conf/zip</outputDirectory>
                                     <destFileName>tomcat.zip</destFileName>
@@ -206,41 +206,6 @@
                         </goals>
                         <configuration>
                             <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.slf4j</groupId>
-                                    <artifactId>log4j-over-slf4j</artifactId>
-                                    <version>${org.slf4j.version}</version>
-                                    <outputDirectory>${project.build.directory}/tomcat-ide/lib</outputDirectory>
-                                    <destFileName>log4j-over-slf4j.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.slf4j</groupId>
-                                    <artifactId>slf4j-api</artifactId>
-                                    <version>${org.slf4j.version}</version>
-                                    <outputDirectory>${project.build.directory}/tomcat-ide/lib</outputDirectory>
-                                    <destFileName>slf4j-api.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.slf4j</groupId>
-                                    <artifactId>jul-to-slf4j</artifactId>
-                                    <version>${org.slf4j.version}</version>
-                                    <outputDirectory>${project.build.directory}/tomcat-ide/lib</outputDirectory>
-                                    <destFileName>jul-to-slf4j.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>ch.qos.logback</groupId>
-                                    <artifactId>logback-core</artifactId>
-                                    <version>${ch.qos.logback.version}</version>
-                                    <outputDirectory>${project.build.directory}/tomcat-ide/lib</outputDirectory>
-                                    <destFileName>logback-core.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>ch.qos.logback</groupId>
-                                    <artifactId>logback-classic</artifactId>
-                                    <version>${ch.qos.logback.version}</version>
-                                    <outputDirectory>${project.build.directory}/tomcat-ide/lib</outputDirectory>
-                                    <destFileName>logback-classic.jar</destFileName>
-                                </artifactItem>
                                 <artifactItem>
                                     <groupId>org.eclipse.che.plugin</groupId>
                                     <artifactId>che-plugin-datasource-ssl-socket-factory</artifactId>
@@ -411,7 +376,7 @@
                         </goals>
                         <configuration>
                             <target>
-                                <unzip dest="${project.build.directory}" src="${project.build.directory}/packager-conf/zip/tomcat.zip">
+                                <unzip dest="${project.build.directory}/tomcat-ide" src="${project.build.directory}/packager-conf/zip/tomcat.zip">
                                     <patternset>
                                         <exclude name="**/ROOT/**" />
                                         <exclude name="**/docs/**" />
@@ -420,7 +385,6 @@
                                         <exclude name="**/host-manager/**" />
                                     </patternset>
                                 </unzip>
-                                <move file="${project.build.directory}/apache-tomcat-${org.apache.tomcat.version}" tofile="${project.build.directory}/tomcat-ide" />
                                 <copy overwrite="true" todir="${project.build.directory}/tomcat-ide/tomcat">
                                     <fileset dir="${project.build.directory}/tomcat-ide" />
                                 </copy>

@@ -56,5 +56,8 @@
         <description>the user role</description>
         <role-name>developer</role-name>
     </security-role>
+    <listener>
+        <listener-class>org.eclipse.che.everrest.ServerContainerInitializeListener</listener-class>
+    </listener>
 
 </web-app>

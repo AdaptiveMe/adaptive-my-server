@@ -11,6 +11,7 @@
 package org.eclipse.che.api.deploy;
 
 import org.eclipse.che.env.local.server.SingleEnvironmentFilter;
+import org.eclipse.che.everrest.ServerContainerInitializeListener;
 import org.eclipse.che.inject.DynaModule;
 import com.google.inject.servlet.ServletModule;
 
@@ -32,6 +33,6 @@ public class ApiServletModule extends ServletModule {
         params.put("ws-name", "default");
         params.put("ws-id", "1q2w3e");
         filter("/*").through(SingleEnvironmentFilter.class, params);
-        serve("/*").with(GuiceEverrestServlet.class);
+        serveRegex("^((?!(\\/api\\/ws($|\\/.*)))\\/.*)").with(GuiceEverrestServlet.class);
     }
 }
